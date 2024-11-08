@@ -28,6 +28,9 @@ def newton_raphson_str(f_str, var_str, chute_inicial, precisao):
             f_valor = f_lambdified(x0)
             df_valor = df_lambdified(x0)
             
+            # Imprimir valores de depuração
+            print(f"Iteração {iteracoes}: x0 = {x0}, f(x0) = {f_valor}, df(x0) = {df_valor}")
+            
             # Aplicar o método de Newton-Raphson
             if df_valor == 0:
                 raise ValueError("Derivada é zero, método não pode continuar.")
@@ -44,18 +47,21 @@ def newton_raphson_str(f_str, var_str, chute_inicial, precisao):
         except ValueError as ve:
             raise ValueError(f"Erro no cálculo: {ve}")
 
-# Exemplo de uso
-f_str = "750 - 1800 * log((160000 / (160000 - 2600 * x)) * 9.81 * x)"  # Função definida pelo usuário
-var_str = "x"  # Variável que o usuário quer usar (pode ser qualquer letra)
-chute_inicial = "0.1"  # Chute inicial fornecido pelo usuário
-precisao = "1e-10"  # Precisão fornecida pelo usuário
+# Função fornecida
+f_str = "4 + x * cos(x)"  
+var_str = "x"  
+chute_inicial_1 = "1"  # Primeiro chute inicial
+chute_inicial_2 = "-2"  # Chute inicial negativo
+precisao = "1e-5"  # Precisão
 
 try:
-    raiz, num_iteracoes = newton_raphson_str(f_str, var_str, chute_inicial, precisao)
+    raiz_1, num_iteracoes_1 = newton_raphson_str(f_str, var_str, chute_inicial_1, precisao)
+    raiz_2, num_iteracoes_2 = newton_raphson_str(f_str, var_str, chute_inicial_2, precisao)
+    
     print("----------NEWTON - RAPHSON-------------------")
     print("---------------------------------------------")
-    print(f"A raiz aproximada é: {raiz}")
-    print(f"A raíz foi achada com: {num_iteracoes} iterações")
+    print(f"A primeira raiz aproximada é: {raiz_1}, encontrada em {num_iteracoes_1} iterações")
+    print(f"A segunda raiz aproximada é: {raiz_2}, encontrada em {num_iteracoes_2} iterações")
     print("---------------------------------------------")
 except ValueError as e:
     print(f"Erro: {e}")
